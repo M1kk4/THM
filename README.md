@@ -1,2 +1,2 @@
-# THM
-Write-ups for THM
+Greetings felow hacker!
+I hope you will find my write-ups helpful!
