@@ -44,7 +44,7 @@ Nmap done: 1 IP address (1 host up) scanned in 9.01 seconds
   <li> 22 (SSH)</li>
   <li> 80 (HTTP)</li>
 </ul>
-<p>We can also see that that FTP allows Anonymous login and has <code>note_to_jake.txt</code>! Let's login, download and check the file.</p>
+<p>We can also see that FTP allows Anonymous login and has <code>note_to_jake.txt</code>! Let's login, download and check the file.</p>
 <pre><code>
 $ ftp 10.10.48.118
 Connected to 10.10.48.118.
