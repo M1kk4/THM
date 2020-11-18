@@ -185,7 +185,7 @@ $ python -c 'import pty; pty.spawn("/bin/bash")'
 
 <pre><code>
 $ cat recipe.txt
-Someone asked what our main ingredient to our spice soup is today. I figured I can't keep it a secret forever and told him it was &lt;b&gt;&lt;---REDACTED---&gt;&lt;/b&gt;.
+Someone asked what our main ingredient to our spice soup is today. I figured I can't keep it a secret forever and told him it was <b>&lt;---REDACTED---&gt;</b>.
 </pre></code>
 
 <p>First thing that i noticed besides <code>recipe.txt</code> was a directory <code>incidents</code>, which contains <code>suspicious.pcapng</code>. For this file we will have to use wireshark. </p>
@@ -225,7 +225,7 @@ echo $LIST > /home/lennie/scripts/startup_list.txt
 $ ls -la /etc/print.sh 
 -rwx------ 1 lennie lennie 25 Nov 12 04:53 /etc/print.sh
 </pre></code>
-<p>SO! We can write our code in <code>print.sh</code> and <code>planner.sh</code> will execute it with root privaleges! Preety neat!</p>
+<p>SO! We can write our code in <code>print.sh</code> and <code>planner.sh</code> will execute it with root privaleges! Pretty neat!</p>
 <p>I edited <code>print.sh</code> with <code>vim</code> so at the end it looks like this:</p>
 <pre><code>
 #!/bin/bash
