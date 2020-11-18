@@ -182,11 +182,11 @@ ftp> exit
 <pre><code>
 $ python -c 'import pty; pty.spawn("/bin/bash")'
 </pre></code>
-<p>TEST</p> 
+
 <pre><code>
 $ cat recipe.txt
 Someone asked what our main ingredient to our spice soup is today. I figured I can't keep it a secret forever and told him it was &lt;b&gt;&lt;---REDACTED---&gt;&lt;/b&gt;.
-</pre>/code>
+</pre></code>
 
 <p>First thing that i noticed besides <code>recipe.txt</code> was a directory <code>incidents</code>, which contains <code>suspicious.pcapng</code>. For this file we will have to use wireshark. </p>
 <p>On host machine type:</p>
