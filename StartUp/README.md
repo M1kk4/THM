@@ -104,11 +104,45 @@ $ cat notice.txt
 Whoever is leaving these damn Among Us memes in this share, it IS NOT FUNNY. People downloading documents from our website will think we are a joke! Now I dont know who it is, but Maya is looking pretty sus.
 </pre></code>
 <p>Nice, lets write down potencial username Maya.</p>
-<p>Change <code>important.jpg</code> to <code>important.png</code> to view one of "there damn Among Us memes"!.</p>
+<p>Change <code>important.jpg</code> to <code>important.png</code> to view one of "these damn Among Us memes"!.</p>
+<p>Let's check the website on port 80 too!</p>
 
+<img src="pictures/StartUp_website.png">
 
-
-
+<p>If we check source code we see something.</p>
+<pre><code>
+ &lt;h1&gt;No spice here!&lt;/h1&gt;
+    &lt;div&gt;
+	&lt;!--when are we gonna update this??--&gt;
+</pre></code>
+<p>There is nothing that would help use here so let's do a gobuster scan. Maybe it finds something.</p>
+<pre><code>
+$ gobuster dir -u http://10.10.104.34/ -w /opt/wordlists/big.txt
+===============================================================
+Gobuster v3.0.1
+by OJ Reeves (@TheColonial) & Christian Mehlmauer (@_FireFart_)
+===============================================================
+[+] Url:            http://10.10.104.34/
+[+] Threads:        10
+[+] Wordlist:       /opt/wordlists/big.txt
+[+] Status codes:   200,204,301,302,307,401,403
+[+] User Agent:     gobuster/3.0.1
+[+] Timeout:        10s
+===============================================================
+2020/11/18 15:23:59 Starting gobuster
+===============================================================
+/.htaccess (Status: 403)
+/.htpasswd (Status: 403)
+/<b><---REDACTED---></b> (Status: 301)
+/server-status (Status: 403)
+===============================================================
+2020/11/18 15:25:28 Finished
+===============================================================
+</pre></code>
+<p>After moving to the newly discovered directory it clearly shows the ftp server!</p>
+<img src=""
+<p>And if we remember from our nmap scan ftp folder is WRITABLE!! That means we can upload reverse shell and get into the machine!<p>
+<p>I will be using <a href="https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php">pentest monkey’s php reverse shell and upload it to ftp.</a></p>
 
 
 
